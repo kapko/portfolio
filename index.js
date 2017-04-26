@@ -6,13 +6,17 @@ let express = require('express'),
 app
 	.use(bodyParser.urlencoded())
 	.use(bodyParser.json())
-	.use(express.static(__dirname + '/public'))
-	.set('views', __dirname + '/public')
+	.use(express.static(__dirname + '/src'))
+	.set('views', __dirname + '/src')
 	.engine('html', ejs.renderFile)
 	.set('view engine', 'html');
 
 app.get('/', (req, res) => {
 	res.render('./index.html');
+});
+
+app.get('*', function (req, res, next) {
+    res.render('./index.html');
 });
 
 app.listen('8080', ()=>{
